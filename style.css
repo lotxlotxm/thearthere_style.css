@@ -119,6 +119,31 @@ svg {
 }
 
 
-
+/*==========================================
+08📌 [모바일 전용] 불렛 리스트 정렬 제어
+==========================================*/
+@media (max-width: 768px) {
+  /* 1. [모바일] 리스트 및 불렛 간격 제어 */
+  /* 불렛의 왼쪽 여백을 줄여 모바일 화면을 더 넓게 활용합니다. */
+  .notion-bulleted_list, 
+  .notion-numbered_list,
+  .notion-list,
+  .notion-list-item {
+    padding-left: 3px !important; 
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  /* 2. [모바일] 본문 텍스트 크기 및 색상 통일 */
+  .notion-bulleted_list li,
+  .notion-bulleted_list li *,
+  .notion-numbered_list li,
+  .notion-numbered_list li *,
+  .notion-list-item,
+  .notion-list-item * {
+    font-size: var(--mb-body) !important;
+    line-height: var(--mb-lh-body) !important;
+    color: #37352f !important;
+  }
+}
 
 
