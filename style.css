@@ -119,3 +119,94 @@ svg {
 }
 
 
+
+
+
+/*==========================================
+07📌 전체 라인 및 테두리 제어 (Line Detail)
+   [목차]
+   ✔️ [1] 구분선(Divider): 투명도 조절
+   ✔️ [2] 콜아웃 테두리(기본형)
+   [3] 확장 구분선 (콜아웃 레드)
+ [4] 블랙 구분선 (핑크 콜아웃)
+------------------------------------------*/
+/* [1] 구분선(Divider) 기본형 색상 변경 */
+.notion-divider {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    opacity: 1 !important;
+}
+/* [2] 콜아웃 테두리(기본형) */
+.notion-collection-card, 
+.notion-callout {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+/* [3] 확장 구분선 (레드 콜아웃) - 갤러리 제외 버전 */
+.notion-callout[class*="red"]:not(:has(.notion-collection-gallery)), 
+div[style*="background-color: rgb(253, 235, 236)"]:not(:has(.notion-collection-gallery)) {
+    width: 100vw !important;
+    max-width: none !important;
+    height: 1px !important;
+    min-height: 1px !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #E6E6E6 !important;
+    box-shadow: none !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+    overflow: visible !important;
+}
+/* 2. 갤러리가 '없는' 레드 콜아웃 내부 요소만 삭제 (버튼은 살림) */
+.notion-callout[class*="red"]:not(:has(.notion-collection-gallery)) *,
+div[style*="background-color: rgb(253, 235, 236)"]:not(:has(.notion-collection-gallery)) * {
+    display: none !important;
+}
+/* [4] 블랙 구분선 (핑크 콜아웃) */
+.notion-callout[class*="pink"]:not(:has(.notion-collection-gallery)), 
+div[style*="background-color: rgb(255, 226, 236)"]:not(:has(.notion-collection-gallery)) {
+    width: 100 !important;
+    max-width: none !important;
+    height: 1px !important;
+    min-height: 1px !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #37352f !important; /* 기존 회색 선 */
+    box-shadow: none !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+}
+/*==========================================
+08📌 [모바일 전용] 불렛 리스트 정렬 제어
+==========================================*/
+@media (max-width: 768px) {
+  /* 1. [모바일] 리스트 및 불렛 간격 제어 */
+  /* 불렛의 왼쪽 여백을 줄여 모바일 화면을 더 넓게 활용합니다. */
+  .notion-bulleted_list, 
+  .notion-numbered_list,
+  .notion-list,
+  .notion-list-item {
+    padding-left: 3px !important; 
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  /* 2. [모바일] 본문 텍스트 크기 및 색상 통일 */
+  .notion-bulleted_list li,
+  .notion-bulleted_list li *,
+  .notion-numbered_list li,
+  .notion-numbered_list li *,
+  .notion-list-item,
+  .notion-list-item * {
+    font-size: var(--mb-body) !important;
+    line-height: var(--mb-lh-body) !important;
+    color: #37352f !important;
+  }
+}
+
+
