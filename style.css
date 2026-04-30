@@ -119,3 +119,71 @@ svg {
 
 
 
+
+
+/*==========================================
+15📌 푸터 제어 (Footer Custom)
+[목차]
+   ✔️ [1] 레이아웃: 푸터 상단 공간 확보 및 중앙 정렬 준비
+   ✔️ [2] 텍스트 제어(Before): 프로젝트 업데이트 안내 (1150px 그리드 일치)
+------------------------------------------*/
+/* [1] 푸터 기본 레이아웃 설정 ----------- */
+.super-footer {
+    padding-top: 100px !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/*-----------------------------------------*/
+/* [2] 푸터 텍스트 컨텐츠 제어
+[✔️Note] - 좌측 정렬 및 본문 폭 고정
+- 02번 섹션에서 설정한 1150px 폭에 맞춰 푸터 텍스트의 시작점을 정렬함*/
+/*1. 첫 번째 문구 (Main Text)*/
+.super-footer::before {
+    content: "This project is continuously updated as new art museums, masterpieces, and movements are added.";
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    max-width: 1150px; /* ⭐ 사이트의 1150px 그리드 폭과 일치시킴 */
+    padding: 0 20px; /* 양옆 최소 여백 */
+    box-sizing: border-box;
+    text-align: center !important;
+    font-size: 14px; /* 글자 크기 축소 */
+    font-weight: 400;
+    color: #999999;
+    line-height: 1.5;
+}
+/* 2. 두 번째 문구 (Sub Text) */
+.super-footer::after {
+    content: '"A digital archive dedicated to the evolution of modern vision, from Impressionist light to Modernist expression."';
+    position: absolute;
+    top: 55px; /* 첫 번째 문구 바로 아래 배치 */
+    width: 100%;
+    max-width: 1150px; /* ⭐ 상단 문구와 동일한 폭 */
+    padding: 0 20px;
+    box-sizing: border-box;
+    text-align: center !important; 
+    font-size: 14px; /* 글자 크기 축소 */
+    color: #999999;
+    font-style: regular;
+    line-height: 1.5;
+}
+@media (max-width: 768px) {
+    /* 1. 모바일 푸터 여백 확장 */
+    .super-footer {
+        padding-top: 130px !important;
+    }
+    /* 2. 모바일 텍스트*/
+    .super-footer::before {
+        top: 25px;
+        font-size: 10px;
+    }
+    .super-footer::after {
+        top: 75px;
+        font-size: 10px;
+    }
+}
+   
+
+
