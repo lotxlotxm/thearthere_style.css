@@ -119,30 +119,26 @@ svg {
 
 
 /*=========================================
-03📌 태그 글자 및 호버 제어
-[목차]
-   ✔️[1]버튼형 태그, 링크 스타일
-   ✔️[2]링크 요소 초기화
-   ✔️[3]호버
-   ✔[4]모바일 최적화
+03📌 태그 글자 및 호버 제어 (수정본)
 -------------------------------------------*/
 /* [1] 버튼형 태그(code) 스타일 및 선명도 복구 */
-code {
+.super-content-block code {
   display: inline-block !important;
   margin: 4px 2px !important;
   padding: 1px 8px !important;
   vertical-align: middle !important;
   border-radius: 6px !important;
   background-color: rgba(0, 0, 0, 0.05) !important;
-  transition: all 0.2s ease !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
   border: none !important;
   font-size: var(--pc-body) !important; 
   opacity: 1 !important; 
 }
+
 /* [2] 태그 내부 링크 요소: 밑줄 절대 금지 및 선명도 100% */
-code a, 
-code span,
-code a span {
+.super-content-block code a, 
+.super-content-block code span,
+.super-content-block code a span {
   font-size: inherit !important;
   text-decoration: none !important; 
   border-bottom: none !important;
@@ -150,31 +146,34 @@ code a span {
   color: inherit !important;
   opacity: 1 !important; 
 }
+
 /* [3] 일반 본문 텍스트 링크 스타일 제어 */
 .notion-text-block a,
 .notion-callout a,
 .notion-column a {
   text-decoration: none !important; 
-  /*opacity: 1 !important;  일반 링크도 선명하게 */
 }
-/* [3] 호버(Hover) 액션*/
-code:has(a):hover {
+
+/* [4] 호버(Hover) 액션 - .super-content-block을 활용하여 우선순위 높이기 */
+.super-content-block code:hover {
   background-color: #000000 !important;
   cursor: pointer !important;
 }
+
 /* 호버 시 내부 텍스트 색상 강제 변환 */
-code:has(a):hover a,
-code:has(a):hover span,
-code:has(a):hover * {
+.super-content-block code:hover a,
+.super-content-block code:hover span,
+.super-content-block code:hover * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-decoration: none !important;
   border-bottom: none !important;
 }
+
 @media (max-width: 768px) {
-  code, code a, code span {
+  .super-content-block code, 
+  .super-content-block code a, 
+  .super-content-block code span {
     font-size: var(--mb-body) !important;
   }
 }
-
-
