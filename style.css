@@ -1,4 +1,5 @@
-/*==========================================
+/*01📌 공통 스타일 설정
+===========================================
    [목차]
    [1] 폰트 및 그리드 제어판 (:root 변수)
    [2] 요소별 스타일(H1~Body, PC/모바일 통합)
@@ -8,16 +9,15 @@
 :root {
   --font-family: 'Noto Sans KR', -apple-system, sans-serif !important;
    /* PC 수치 */
-  --pc-h1: 48px; --pc-h2: 28px; --pc-h3: 23px; --pc-h4: 16px; --pc-body: 16px; --pc-caption: 11px;
-  --pc-lh-h1: 1; --pc-lh-h2: 1.2; --pc-lh-h3: 1.3; --pc-lh-h4: 1.6; --pc-lh-body: 1.6; --pc-lh-caption: 1.5; /*무력화-pc블록간격 삭제*/
+  --pc-h1: 48px; --pc-h2: 28px; --pc-h3: 23px; --pc-body: 16px; --pc-caption: 11px;
+  --pc-lh-h1: 1; --pc-lh-h2: 1.2; --pc-lh-h3:1.3; --pc-lh-body: 1.6; --pc-lh-caption: 1.5; /*무력화-pc블록간격 삭제*/
 /* 모바일 수치 */
-  --mb-h1: 32px; --mb-h2: 20px; --mb-h3: 18px; --mb-h4: 13px; --mb-body: 13px; --mb-caption: 8px;
-  --mb-lh-h1: 1.2; --mb-lh-h2: 1.5; --mb-lh-h3: 1.2; --mb-lh-h4: 1.6; --mb-lh-body: 1.6; --mb-lh-caption: 1.2; /*무력화-mb블록간격 삭제*/
+  --mb-h1: 32px; --mb-h2: 20px; --mb-h3: 18px; --mb-body: 13px; --mb-caption: 8px;
+  --mb-lh-h1: 1.2; --mb-lh-h2: 1.5; --mb-lh-h3: 1.2; --mb-lh-body: 1.6; --mb-lh-caption: 1.2; /*무력화-mb블록간격 삭제*/
 /* 공통 설정 */
   --h1-weight: 900;
   --h2-weight: 900;
   --h3-weight: 700;
-  --h4-weight: 200;
   --banner-gap: 20px;
 }
 /* 1. 폰트 기본 설정 */
@@ -54,17 +54,6 @@ h3, .notion-h3, h3 * {
   h3, .notion-h3, h3 * { 
     font-size: var(--mb-h3) !important; line-height: var(--mb-lh-h3) !important; 
     margin-top: var(--mb-h3-mt) !important; margin-bottom: var(--mb-h3-mb) !important; 
-  }
-}
-/* --- H4 제목 --- */
-h4, .notion-h4, h4 * { 
-  font-size: var(--pc-h4) !important; font-weight: var(--h4-weight) !important; 
-  line-height: var(--pc-lh-h4) !important; margin-top: var(--pc-h4-mt) !important; margin-bottom: var(--pc-h4-mb) !important; 
-}
-@media (max-width: 768px) {
-  h4, .notion-h4, h4 * { 
-    font-size: var(--mb-h4) !important; line-height: var(--mb-lh-h4) !important; 
-    margin-top: var(--mb-h4-mt) !important; margin-bottom: var(--mb-h4-mb) !important; 
   }
 }
 /* --- 본문 및 링크 (화살표/아이콘 제외 설정) --- */
