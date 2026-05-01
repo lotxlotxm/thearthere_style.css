@@ -17,7 +17,7 @@
   --h1-weight: 900;
   --h2-weight: 900;
   --h3-weight: 700;
-  --h4-weight: 400;
+  --h4-weight: 200;
   --banner-gap: 20px;
 }
 /* 1. 폰트 기본 설정 */
@@ -60,9 +60,6 @@ h3, .notion-h3, h3 * {
 h4, .notion-h4, h4 * { 
   font-size: var(--pc-h4) !important; font-weight: var(--h4-weight) !important; 
   line-height: var(--pc-lh-h4) !important; margin-top: var(--pc-h4-mt) !important; margin-bottom: var(--pc-h4-mb) !important; 
-}
-h4, .notion-h4, h4 * { 
-  font-weight: 200 !important;
 }
 @media (max-width: 768px) {
   h4, .notion-h4, h4 * { 
