@@ -67,7 +67,8 @@ h3, .notion-h3, h3 * {
 .notion-link, 
 p,
 .notion-toggle summary,
-.notion-toggle summary span { 
+.notion-toggle summary span,
+.notion-toggle__content { 
   font-size: var(--pc-body) !important; 
   line-height: var(--pc-lh-body) !important; 
 }
@@ -85,7 +86,8 @@ svg {
   .notion-link, 
   p,
   .notion-toggle summary,
-  .notion-toggle summary span { 
+  .notion-toggle summary span,
+  .notion-toggle__content { 
     font-size: var(--mb-body) !important; 
     line-height: var(--mb-lh-body) !important; 
   }
