@@ -123,15 +123,13 @@ svg {
 
 
 /*📌===========그레이 콜아웃 내부의 갤러리 그리드 설정 */
-.notion-callout[style*="background"] .notion-collection-gallery,
 .notion-callout.bg-gray-light .notion-collection-gallery {
-  display: grid !important;
+  display: grid;
   grid-template-columns: repeat(6, 1fr) !important;
   gap: 8px !important;
 }
 
 /* 갤러리 카드 기본 외형 및 호버 애니메이션 */
-.notion-callout[style*="background"] .notion-collection-card,
 .notion-callout.bg-gray-light .notion-collection-card {
   position: relative !important;
   overflow: hidden !important;
@@ -141,13 +139,11 @@ svg {
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-.notion-callout[style*="background"] .notion-collection-card:hover,
 .notion-callout.bg-gray-light .notion-collection-card:hover {
   transform: translateY(0px) !important;
 }
 
 /* 컬러 썸네일 비율 및 크기 조절 */
-.notion-callout[style*="background"] .notion-collection-card__cover,
 .notion-callout.bg-gray-light .notion-collection-card__cover {
   width: 100% !important;
   aspect-ratio: 2 / 3 !important; /* 썸네일 비율 조절 */
@@ -158,13 +154,11 @@ svg {
 }
 
 /* 호버 시 썸네일 약간 어둡게 처리 */
-.notion-callout[style*="background"] .notion-collection-card:hover .notion-collection-card__cover,
 .notion-callout.bg-gray-light .notion-collection-card:hover .notion-collection-card__cover {
   filter: brightness(0.8) !important;
 }
 
 /* 호버 시 텍스트 영역 (제목 및 속성) 나타나기 */
-.notion-callout[style*="background"] .notion-collection-card__content,
 .notion-callout.bg-gray-light .notion-collection-card__content {
   position: absolute !important;
   bottom: 0 !important;
@@ -178,20 +172,17 @@ svg {
   pointer-events: none !important;
 }
 
-.notion-callout[style*="background"] .notion-collection-card:hover .notion-collection-card__content,
 .notion-callout.bg-gray-light .notion-collection-card:hover .notion-collection-card__content {
   opacity: 1 !important;
 }
 
 /* 텍스트 타이틀 및 속성 스타일 */
-.notion-callout[style*="background"] .notion-collection-card__property-list,
 .notion-callout.bg-gray-light .notion-collection-card__property-list {
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
 }
 
-.notion-callout[style*="background"] .notion-property.title,
 .notion-callout.bg-gray-light .notion-property.title {
   font-size: 1.1em !important;
   font-weight: 700 !important;
@@ -199,14 +190,8 @@ svg {
 }
 
 /* 속성 글자 화이트 강제 적용 - 노션 내부 속성까지 완전히 덮어씀 */
-.notion-callout[style*="background"] .notion-collection-card__property-list .notion-property,
-.notion-callout[style*="background"] .notion-collection-card__property-list p,
-.notion-callout[style*="background"] .notion-collection-card__property-list span,
 .notion-callout.bg-gray-light .notion-collection-card__property-list .notion-property,
 .notion-callout.bg-gray-light .notion-collection-card__property-list p,
 .notion-callout.bg-gray-light .notion-collection-card__property-list span {
   color: #ffffff !important;
 }
-
-
-
