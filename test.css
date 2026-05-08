@@ -23,7 +23,7 @@ svg {
   font-size: inherit !important; 
 }
 /*=====02📌 토글 펼치기 숨기기=======*/
-/*[1]토글 펼치기 숨기기 (공통 및 텍스트형)
+/*[1]토글 펼치기 숨기기 (공통 및 텍스트형)*/
 /* 1. 기본 콜아웃의 테두리 및 배경 투명화 */
 .notion-callout,
 div.notion-callout {
@@ -312,54 +312,57 @@ code:has(a):not(.notion-callout[class*="orange"] code):hover * {
 }
 
 /*=========================================
-05-1📌 [태그-알약 스타일] 주황색 콜아웃+불렛 (Super.so 100% 대응 고정 버전)
+05-1📌 [태그-알약 스타일] 주황색 콜아웃+불렛 (레퍼런스 일치 상단 고정판)
 =========================================*/
 
-/* [1] 📌 Super.so 래퍼 계층 구조를 역추적하여 알약을 품은 블록 라인만 스티키로 강제 격리 */
-main,
-.super-content,
-[class*="notion-block-"]:has(.notion-callout[class*="orange"] ul:has(code)) {
+/* [1] 주황색 콜아웃을 품고 있는 노션 블록 자체를 화면 상단에 완벽 밀착 */
+.notion-block:has(.notion-callout[class*="orange"] ul:has(code)) {
   position: -webkit-sticky !important;
   position: sticky !important;
-  top: 0 !important;             /* 💡 상단 메뉴바가 존재한다면 top: 60px !important; 로 변경하세요 */
+  top: 0 !important;             /* 💡 Super.so 상단 메뉴바가 켜져 있다면 top: 60px !important; 로 수정 */
   z-index: 9999 !important;       /* 본문 글자나 이미지보다 무조건 최상위 레이어 배치 */
-  will-change: transform, top !important;
+  background-color: #ffffff !important; /* 고정 시 본문 글자가 뒤에 겹치지 않게 가림막 처리 */
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px 0 !important;
+  
+  /* 레퍼런스처럼 자연스러운 하단 경계선 그림자 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* [1-1] 주황색 콜아웃 블록 자체는 화면 최상단 고정 시 투명하게 만들고, 레이아웃을 확장 */
+/* [1-1] 주황색 콜아웃 자체를 좌우 100% 반응형으로 조율 */
 html body .notion-callout[class*="orange"]:has(ul:has(code)) {
-  background-color: #ffffff !important; /* 고정되었을 때 뒷글씨가 안 보이도록 불투명 흰색 가림막 역할 */
+  background-color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; /* 바닥과의 미세한 입체 분리막 구현 */
-  padding: 10px 20px !important;   /* 위아래 정갈한 여백 호흡 부여 */
+  padding: 0 20px !important;     /* 최소 좌우 여백 확보 */
   margin: 0 auto !important;
-  max-width: 1200px !important;    /* 포트폴리오 본문 폭 레이아웃과 수치 일치 */
+  max-width: 1150px !important;    /* 포트폴리오 가로 그리드 정렬 */
   width: 100% !important;
   box-sizing: border-box !important;
 }
 
-/* [1-2] 내부 세부 콘텐츠 및 아이콘 비활성화 */
+/* [1-2] 불필요한 노션 기본 아이콘 및 삐져나온 마진 소거 */
 html body .notion-callout[class*="orange"]:has(ul:has(code)) .notion-callout__content {
   margin-left: 0 !important;
   padding: 0 !important;
   background: transparent !important;
 }
 html body .notion-callout[class*="orange"]:has(ul:has(code)) .notion-callout__icon {
-  display: none !important; /* 노션 기본 콜아웃 전구/오렌지 아이콘 소거 */
+  display: none !important; 
 }
 
-/* [2] 가로 슬라이더로 강제 리빌딩 */
+/* [2] 알약 버튼 리스트를 가로형 슬라이더 구조로 선언 */
 ul:has(code) {
   display: flex !important;
-  flex-wrap: nowrap !important;  /* 줄바꿈 절대 차단 */
-  overflow-x: auto !important;   /* 가로 스크롤 강제 활성화 */
+  flex-wrap: nowrap !important;  /* 절대 줄바꿈 금지 */
+  overflow-x: auto !important;   /* 넘치는 분량은 스와이프/드래그 가로 스크롤 */
   gap: 8px !important;          
-  padding: 0 !important;      
+  padding: 5px 0 !important;      
   margin: 0 !important;
-  list-style: none !important;   /* 기본 불렛 점 스타일 제거 */
+  list-style: none !important;   /* 기본 점 제거 */
   width: 100% !important;
   
-  /* 시스템 기본 스크롤바 감추기 */
+  /* 시스템 스크롤바 보이지 않게 처리 */
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
@@ -367,7 +370,7 @@ ul:has(code)::-webkit-scrollbar {
   display: none !important;
 }
 
-/* [3] 정렬 및 리스트 불렛 완전 소거 */
+/* [3] 불렛 기호 흔적 지우기 */
 ul:has(code) li {
   display: inline-flex !important;
   flex: 0 0 auto !important;
@@ -380,7 +383,7 @@ ul:has(code) li::before {
   content: "" !important;
 }
 
-/* [4] 주황색 콜아웃 내부 불렛+code 타겟 (사용자가 정의한 둥근 알약 디자인 복원) */
+/* [4] 알약 버튼 디자인 (레퍼런스 이미지의 깔끔한 둥근 알약 스타일) */
 html body .notion-callout[class*="orange"] ul:has(code) code {
   display: inline-flex !important;
   align-items: center !important;
@@ -396,7 +399,7 @@ html body .notion-callout[class*="orange"] ul:has(code) code {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02) !important;
 }
 
-/* [5] 내부 링크 및 텍스트 칼라 정밀 고정 */
+/* [5] 내부 텍스트 링크 가독성 고정 */
 html body ul:has(code) code a, 
 html body ul:has(code) code span,
 html body ul:has(code) code a span {
@@ -411,8 +414,8 @@ html body ul:has(code) code a span {
 
 /* [6] 모바일 반응형 압축 */
 @media (max-width: 768px) {
-  [class*="notion-block-"]:has(.notion-callout[class*="orange"] ul:has(code)) {
-    top: 0 !important; /* 모바일 네비게이션 높이에 대응 */
+  .notion-block:has(.notion-callout[class*="orange"] ul:has(code)) {
+    top: 0 !important;
   }
   html body .notion-callout[class*="orange"] ul:has(code) code {
     padding: 6px 14px !important;
