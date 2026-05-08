@@ -1,10 +1,9 @@
-/TOP 공유버튼 제어/
 (function() {
   function initButtons() {
-    // 1. 이미 버튼이 화면에 주입되어 있다면 중복 실행 방지
+    // 1. 이미 버튼이 화면에 안전하게 존재한다면 중복 생성 차단
     if (document.getElementById('super-custom-controls')) return;
 
-    // 2. 노션의 핵심 본문 영역이 아직 생성되지 않았다면 대기 (모바일 딜레이 방어)
+    // 2. body 태그가 없으면 안전하게 실행 보류 (에러 방어)
     if (!document.body) return;
 
     // 3. 버튼 컨테이너 생성 및 HTML 주입
@@ -34,8 +33,6 @@
     if (shareBtn) {
       shareBtn.onclick = function() {
         const url = window.location.href;
-        
-        // 아이패드 데스크톱 모드 및 모바일 기기 감지 통합
         const isMobileOrTablet = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
                                  (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
@@ -55,45 +52,21 @@
     }
   }
 
-  function copyText(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Link copied to clipboard.");
-      }).catch(() => fallbackCopy(text));
-    } else {
-      fallbackCopy(text);
-    }
+  // [자가 복구 및 초기 진입 장치] 
+  // 0.2초마다 화면을 감시하여 버튼이 소실되었거나 본문이 새로 그려졌을 때 강제로 재생성시킵니다.
+  // 이 루프는 무한히 돌지 않고, 버튼이 안전하게 화면에 안착하여 자리를 잡으면 탐색 주기를 2초로 늦춰 배터리와 사양 소모를 차단합니다.
+  let watchInterval = 200;
+  function startWatch() {
+    setTimeout(function watch() {
+      initButtons();
+      
+      const btnExists = document.getElementById('super-custom-controls');
+      // 버튼이 정상적으로 박혀있다면 감시 주기 완화 (휴면 모드)
+      watchInterval = btnExists ? 2000 : 200; 
+      
+      setTimeout(watch, watchInterval);
+    }, watchInterval);
   }
 
-  function fallbackCopy(text) {
-    const input = document.createElement('input');
-    input.value = text;
-    input.style.position = 'fixed';
-    input.style.opacity = '0';
-    document.body.appendChild(input);
-    input.focus();
-    input.select();
-    try {
-      document.execCommand('copy');
-      alert("Link copied to clipboard.");
-    } catch (err) {}
-    document.body.removeChild(input);
-  }
-
-  // 실행 트리거 분기 가공
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    initButtons();
-  } else {
-    window.addEventListener('DOMContentLoaded', initButtons);
-    window.addEventListener('load', initButtons);
-  }
-
-  // 📌 [모바일 초핵심 보완] 노션 비동기 로딩 딜레이 방어용 관측 타이머 실행
-  const controlsObserver = setInterval(() => {
-    initButtons();
-    // 성공적으로 버튼이 등록되었다면 브라우저 과부하 방지를 위해 타이머 해제
-    if (document.getElementById('super-custom-controls')) {
-      clearInterval(controlsObserver);
-    }
-  }, 500); // 0.5초마다 노션 본문이 로드되었는지 감시
+  startWatch();
 })();
