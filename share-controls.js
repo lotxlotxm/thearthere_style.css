@@ -1,9 +1,13 @@
+/TOP 공유버튼 제어/
 (function() {
   function initButtons() {
-    // 중복 실행 방지
+    // 1. 이미 버튼이 화면에 주입되어 있다면 중복 실행 방지
     if (document.getElementById('super-custom-controls')) return;
 
-    // 1. 자바스크립트로 직접 버튼 HTML 요소 생성 및 배치
+    // 2. 노션의 핵심 본문 영역이 아직 생성되지 않았다면 대기 (모바일 딜레이 방어)
+    if (!document.body) return;
+
+    // 3. 버튼 컨테이너 생성 및 HTML 주입
     const controlContainer = document.createElement('div');
     controlContainer.id = 'super-custom-controls';
     controlContainer.innerHTML = `
@@ -31,11 +35,10 @@
       shareBtn.onclick = function() {
         const url = window.location.href;
         
-        // 아이패드 데스크톱 모드 및 모바일 환경 통합 판별 필터링
+        // 아이패드 데스크톱 모드 및 모바일 기기 감지 통합
         const isMobileOrTablet = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
                                  (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
-        // 네이티브 공유 패널 호출 시도
         if (isMobileOrTablet && navigator.share) {
           navigator.share({
             title: document.title,
@@ -77,10 +80,20 @@
     document.body.removeChild(input);
   }
 
-  // DOM 구조가 확보된 즉시 렌더링하도록 분기 안전 조치
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initButtons);
-  } else {
+  // 실행 트리거 분기 가공
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
     initButtons();
+  } else {
+    window.addEventListener('DOMContentLoaded', initButtons);
+    window.addEventListener('load', initButtons);
   }
+
+  // 📌 [모바일 초핵심 보완] 노션 비동기 로딩 딜레이 방어용 관측 타이머 실행
+  const controlsObserver = setInterval(() => {
+    initButtons();
+    // 성공적으로 버튼이 등록되었다면 브라우저 과부하 방지를 위해 타이머 해제
+    if (document.getElementById('super-custom-controls')) {
+      clearInterval(controlsObserver);
+    }
+  }, 500); // 0.5초마다 노션 본문이 로드되었는지 감시
 })();
