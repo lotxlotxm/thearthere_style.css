@@ -1,122 +1,124 @@
-<!----------[TOP 공유 버튼 제어]----------->
-<div id="super-custom-controls">
-    <button class="control-btn share" id="share-btn-action" title="공유하기">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
-        </svg>
-    </button>
-    <a href="#" class="control-btn top" id="top-btn-action">TOP</a>
-</div>
-<style>
-  #super-custom-controls {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    z-index: 99999999 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    opacity: 1 !important;
-  }
-  .control-btn {
-    width: 45px !important;
-    height: 45px !important;
-    background-color: #ffffff !important;
-    border: 1px solid #c9c9c9 !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: transform 0.2s ease !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
-    padding: 0 !important;
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .control-btn.top {
-    font-size: 13px !important;
-    font-weight: bold !important;
-    color: #777777 !important;
-    line-height: 1.1 !important;
-    text-decoration: none !important;
-  }
-  .control-btn.share svg {
-    width: 20px !important;
-    height: 20px !important;
-    fill: #777777 !important;
-  }
-  .control-btn:hover {
-    transform: scale(1.1) !important;
-  }
-</style>
-<script>
-  (function() {
-    function initButtons() {
-      const container = document.getElementById('super-custom-controls');
-      if (!container) return;
+(function() {
+  function initButtons() {
+    const container = document.getElementById('super-custom-controls');
+    if (!container) return;
+
+    // [1] 모바일/아이패드 렌더링 갱신 시 버튼이 소멸하는 것을 원천 차단하기 위해 body 최하단으로 강제 복구 배치
+    if (document.body && container.parentElement !== document.body) {
       document.body.appendChild(container);
+    }
 
-      const topBtn = document.getElementById('top-btn-action');
-      const shareBtn = document.getElementById('share-btn-action');
+    const topBtn = document.getElementById('top-btn-action');
+    const shareBtn = document.getElementById('share-btn-action');
 
-      if (topBtn) {
-        topBtn.onclick = function(e) {
+    // [2] 모바일 및 터치 디바이스(아이패드 등) 터치 즉시 반응 유틸리티
+    function bindFastClick(element, action) {
+      if (!element) return;
+      
+      let moved = false;
+      element.addEventListener('touchstart', function() {
+        moved = false;
+      }, { passive: true });
+
+      element.addEventListener('touchmove', function() {
+        moved = true;
+      }, { passive: true });
+
+      element.addEventListener('touchend', function(e) {
+        if (!moved) {
           e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-      }
+          action();
+        }
+      });
 
-      if (shareBtn) {
-        shareBtn.onclick = function() {
-          const url = window.location.href;
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          // 모바일 기기이고 공유 API를 지원하는 경우
-          if (isMobile && navigator.share) {
-            navigator.share({
-              title: document.title,
-              url: url
-            }).catch((error) => {
-              // 취소했을 때(AbortError)는 아무것도 하지 않음
-              if (error.name !== 'AbortError') {
-                copyText(url);
-              }
-            });
-          } else {
-            // PC 환경은 바로 링크 복사
-            copyText(url);
-          }
-        };
-      }
+      // 마우스 클릭도 정상 지원 (PC 대응)
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (e.screenX === 0 && e.screenY === 0) return; 
+        action();
+      });
     }
-    function copyText(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-          alert("Link copied to clipboard.");
-        }).catch(() => fallbackCopy(text));
-      } else {
-        fallbackCopy(text);
-      }
+
+    // TOP 버튼 작동 정의
+    if (topBtn && !topBtn.dataset.bound) {
+      topBtn.dataset.bound = "true";
+      bindFastClick(topBtn, function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     }
-    function fallbackCopy(text) {
-      const input = document.createElement('input');
-      input.value = text;
-      input.style.position = 'fixed';
-      input.style.opacity = '0';
-      document.body.appendChild(input);
-      input.focus();
-      input.select();
-      try {
-        document.execCommand('copy');
+
+    // 공유하기 버튼 작동 정의
+    if (shareBtn && !shareBtn.dataset.bound) {
+      shareBtn.dataset.bound = "true";
+      bindFastClick(shareBtn, function() {
+        const url = window.location.href;
+        // 아이패드는 navigator.maxTouchPoints 검사로 정확하게 태블릿 식별 보장
+        const isMobileOrTablet = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+        
+        if (isMobileOrTablet && navigator.share) {
+          navigator.share({
+            title: document.title,
+            url: url
+          }).catch((error) => {
+            if (error.name !== 'AbortError') {
+              copyText(url);
+            }
+          });
+        } else {
+          copyText(url);
+        }
+      });
+    }
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
         alert("Link copied to clipboard.");
-      } catch (err) {}
-      document.body.removeChild(input);
-    }
-
-    if (document.readyState === 'complete') {
-      initButtons();
+      }).catch(() => fallbackCopy(text));
     } else {
-      window.addEventListener('load', initButtons);
+      fallbackCopy(text);
     }
-  })();
-</script>
+  }
+
+  function fallbackCopy(text) {
+    const input = document.createElement('input');
+    input.value = text;
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.focus();
+    input.select();
+    try {
+      document.execCommand('copy');
+      alert("Link copied to clipboard.");
+    } catch (err) {}
+    document.body.removeChild(input);
+  }
+
+  // 초기 실행 리스너 등록
+  if (document.readyState === 'complete') {
+    initButtons();
+  } else {
+    window.addEventListener('load', initButtons);
+    document.addEventListener('DOMContentLoaded', initButtons);
+  }
+
+  // [3] 🚨 깃허브 로드 비동기 시차 완벽 방어용 상시 복구 엔진 (핵심)
+  // 모바일/아이패드에서 Super 엔진이 돔을 다시 그리면서 버튼을 임의로 소거하더라도, 무한히 감지하여 0.1초 만에 계속 재배치합니다.
+  const observer = new MutationObserver(function() {
+    const container = document.getElementById('super-custom-controls');
+    if (container && container.parentElement !== document.body) {
+      initButtons();
+    }
+  });
+
+  // Body의 하위 노드 구조 변화를 추적 시작
+  if (document.body) {
+    observer.observe(document.body, { childList: true, subtree: true });
+  } else {
+    window.addEventListener('DOMContentLoaded', function() {
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  }
+})();
