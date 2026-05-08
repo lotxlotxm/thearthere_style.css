@@ -28,3 +28,120 @@ document.addEventListener('keydown', function(e) {
     return false;
   }
 });
+
+
+
+
+
+
+<!--------검색바 필터----------->
+
+<script>
+(function() {
+    let searchTimer; // GA4 전송을 위한 타이머 변수
+    function startSearchSystem() {
+        // 검색창 타입별 설정
+        const searchConfigs = {
+            "여기에검색바": "Search for cities or art museums...",
+            "아티스트검색바": "Search by artist, artwork, or art museum name...",
+            "컬렉션검색바": "Search by artist, artwork..."
+        };
+        const inject = () => {
+            const allElements = document.querySelectorAll('.notion-text, .notion-callout__content, span, div');
+            
+            allElements.forEach(el => {
+                if (el.innerText && !el.querySelector('.my-specific-search')) {
+                    const text = el.innerText.trim();
+                    
+                    if (searchConfigs[text]) {
+                        const placeholderText = searchConfigs[text];
+                        
+                        el.innerHTML = `
+                            
+    <div class="search-wrapper" style="margin: 30px 0 10px 0; position: relative; width: 100%; z-index: 999; background: transparent !important;">
+                                <input type="text" class="my-specific-search" placeholder="${placeholderText}" 
+                                       style="
+                                           width: 100%; 
+                                           padding: 10px 40px 12px 0px; 
+                                           border: none; 
+                                           border-bottom: 2px solid #37352f; 
+                                           border-radius: 0; 
+                                           outline: none; 
+                                           background: transparent !important; 
+                                           color: #37352f !important; 
+                                           box-sizing: border-box;
+                                           font-size: 18px;
+                                           font-weight: 400;
+                                           font-family: inherit;
+                                       ">
+                                <span style="
+                                    position: absolute; 
+                                    right: 5px; 
+                                    top: 50%; 
+                                    transform: translateY(-50%); 
+                                    pointer-events: none;
+                                    font-size: 22px;
+                                    opacity: 0.8;
+                                    color: #000;
+                                ">🔍</span>
+                            </div>
+                        `;
+                        
+                        const input = el.querySelector('.my-specific-search');
+                        input.addEventListener('input', handleIndividualSearch);
+                    }
+                }
+            });
+        };
+        function handleIndividualSearch(e) {
+            const filter = e.target.value.toLowerCase().trim();
+            const parentBlock = e.target.closest('.notion-text, .notion-callout');
+
+            // --- GA4 검색어 전송 로직 (추가된 부분) ---
+            clearTimeout(searchTimer);
+            if (filter.length > 0) {
+                searchTimer = setTimeout(() => {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'view_search_results', {
+                            search_term: filter
+                        });
+                        console.log('GA4 검색어 전송 완료:', filter); // 확인용 로그 (나중에 삭제 가능)
+                    }
+                }, 800); // 0.8초간 입력이 없으면 전송
+            }
+            // -----------------------------
+            let nextEl = parentBlock ? parentBlock.nextElementSibling : null;
+            while (nextEl && !nextEl.classList.contains('notion-collection')) {
+                nextEl = nextEl.nextElementSibling;
+            }
+
+            if (nextEl) {
+                const items = nextEl.querySelectorAll('.notion-collection-list__item, .notion-list-item, .notion-collection-item, .notion-collection-card');
+                items.forEach(item => {
+                    const text = item.innerText.toLowerCase();
+                    if (text.includes(filter)) {
+                        item.style.setProperty('display', '', 'important');
+                        item.style.setProperty('opacity', '1', 'important');
+                        item.style.setProperty('visibility', 'visible', 'important');
+                        item.style.setProperty('height', 'auto', 'important');
+                    } else {
+                        item.style.setProperty('display', 'none', 'important');
+                        item.style.setProperty('opacity', '0', 'important');
+                        item.style.setProperty('visibility', 'hidden', 'important');
+                        item.style.setProperty('height', '0', 'important');
+                    }
+                });
+            }
+        }
+
+        const observer = new MutationObserver(inject);
+        observer.observe(document.body, { childList: true, subtree: true });
+        inject();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startSearchSystem);
+    } else {
+        startSearchSystem();
+    }
+})();</script>
