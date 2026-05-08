@@ -1,12 +1,9 @@
 (function() {
   function initButtons() {
-    // 1. 이미 버튼이 화면에 안전하게 존재한다면 중복 생성 차단
+    // 중복 실행 방지
     if (document.getElementById('super-custom-controls')) return;
 
-    // 2. body 태그가 없으면 안전하게 실행 보류 (에러 방어)
-    if (!document.body) return;
-
-    // 3. 버튼 컨테이너 생성 및 HTML 주입
+    // 1. 자바스크립트로 직접 버튼 HTML 요소 생성 및 배치
     const controlContainer = document.createElement('div');
     controlContainer.id = 'super-custom-controls';
     controlContainer.innerHTML = `
@@ -33,9 +30,12 @@
     if (shareBtn) {
       shareBtn.onclick = function() {
         const url = window.location.href;
+        
+        // 아이패드 데스크톱 모드 및 모바일 환경 통합 판별 필터링
         const isMobileOrTablet = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
                                  (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
+        // 네이티브 공유 패널 호출 시도
         if (isMobileOrTablet && navigator.share) {
           navigator.share({
             title: document.title,
@@ -52,21 +52,35 @@
     }
   }
 
-  // [자가 복구 및 초기 진입 장치] 
-  // 0.2초마다 화면을 감시하여 버튼이 소실되었거나 본문이 새로 그려졌을 때 강제로 재생성시킵니다.
-  // 이 루프는 무한히 돌지 않고, 버튼이 안전하게 화면에 안착하여 자리를 잡으면 탐색 주기를 2초로 늦춰 배터리와 사양 소모를 차단합니다.
-  let watchInterval = 200;
-  function startWatch() {
-    setTimeout(function watch() {
-      initButtons();
-      
-      const btnExists = document.getElementById('super-custom-controls');
-      // 버튼이 정상적으로 박혀있다면 감시 주기 완화 (휴면 모드)
-      watchInterval = btnExists ? 2000 : 200; 
-      
-      setTimeout(watch, watchInterval);
-    }, watchInterval);
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied to clipboard.");
+      }).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
   }
 
-  startWatch();
+  function fallbackCopy(text) {
+    const input = document.createElement('input');
+    input.value = text;
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.focus();
+    input.select();
+    try {
+      document.execCommand('copy');
+      alert("Link copied to clipboard.");
+    } catch (err) {}
+    document.body.removeChild(input);
+  }
+
+  // DOM 구조가 확보된 즉시 렌더링하도록 분기 안전 조치
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initButtons);
+  } else {
+    initButtons();
+  }
 })();
