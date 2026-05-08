@@ -36,7 +36,6 @@ document.addEventListener('keydown', function(e) {
 
 <!--------검색바 필터----------->
 
-<script>
 (function() {
     let searchTimer; // GA4 전송을 위한 타이머 변수
     function startSearchSystem() {
@@ -144,4 +143,4 @@ document.addEventListener('keydown', function(e) {
     } else {
         startSearchSystem();
     }
-})();</script>
+})();
