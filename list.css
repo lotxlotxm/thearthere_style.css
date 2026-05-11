@@ -150,7 +150,7 @@ Notion + Super.so optimized
 }
 
 /* =========================
-9. GRAY BUTTON
+9. GRAY BUTTON (이중 음영 완벽 제거 버전)
 ========================= */
 
 .notion-collection-list__item-property:nth-child(2) [class*="orange"]{
@@ -167,19 +167,28 @@ Notion + Super.so optimized
   border-radius:4px!important;
 
   flex-shrink:0!important;
+  
+  /* 🚨 브라우저 자체나 노션에서 기본으로 씌우는 이중 음영 박스자국 완전 제거 */
+  box-shadow:none!important;
+  border:none!important;
 }
 
+/* 🚨 버튼 안의 자식 요소들에 노션 기본 그레이 배경색이 겹쳐서 들어가는 것을 원천 차단 */
 .notion-collection-list__item-property:nth-child(2) [class*="orange"],
-.notion-collection-list__item-property:nth-child(2) [class*="orange"] *{
+.notion-collection-list__item-property:nth-child(2) [class*="orange"] *,
+.notion-collection-list__item-property:nth-child(2) [class*="orange"] a,
+.notion-collection-list__item-property:nth-child(2) [class*="orange"] span {
   color:#000!important;
   -webkit-text-fill-color:#000!important;
 
   font-size:11px!important;
+  
+  /* 🚨 이 부분이 핵심입니다: 자식 텍스트 블록에 깔린 둥근 회색 배경을 투명하게 날립니다 */
+  background:transparent!important; 
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border-radius:0px!important;
 }
-
-
-
-
 
 
 
