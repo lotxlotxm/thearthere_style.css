@@ -183,71 +183,49 @@ Notion + Super.so optimized
 
 @media (max-width:768px){
 
-  .notion-collection-list__item{
-    flex-direction:column!important;
-
-    gap:10px!important;
-
-    padding:16px 0!important;
-  }
-
-  /* title */
-
-  .notion-collection-list__item .notion-item-title{
-    flex:none!important;
-
-    min-width:100%!important;
-    max-width:100%!important;
-  }
-
-  /* property wrap */
-
   .notion-collection-list__item-properties{
     width:100%!important;
 
-    padding:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    margin:0!important;
 
     display:flex!important;
+    flex-direction:row!important;
 
     align-items:center!important;
-    justify-content:space-between!important;
+    justify-content:flex-start!important;
+
+    gap:12px!important;
+
+    box-sizing:border-box!important;
   }
 
-  /* property 1 */
-
+  /* 속성1 */
   .notion-collection-list__item-property:nth-child(1){
     flex:1 1 auto!important;
 
     min-width:0!important;
-    max-width:55%!important;
+    max-width:none!important;
 
-    overflow:hidden!important;
+    text-align:left!important;
+
+    margin:0!important;
+    padding:0!important;
   }
 
-  .notion-collection-list__item-property:nth-child(1),
-  .notion-collection-list__item-property:nth-child(1) *{
-    font-size:11px!important;
-
-    white-space:nowrap!important;
-    text-overflow:ellipsis!important;
-    overflow:hidden!important;
-  }
-
-  /* property 2 */
-
+  /* 속성2 */
   .notion-collection-list__item-property:nth-child(2){
-    flex:0 0 auto!important;
+    flex:0 0 85px!important;
 
+    width:85px!important;
+
+    margin-left:auto!important;
+
+    display:flex!important;
     justify-content:flex-end!important;
+
+    padding:0!important;
   }
 
-  /* icon remove */
-
-  .notion-collection-list__item-icon{
-    display:none!important;
-  }
-
-  .notion-collection-list__item-property::before{
-    display:none!important;
-  }
 }
