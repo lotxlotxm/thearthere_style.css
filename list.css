@@ -104,7 +104,7 @@ Notion + Super.so optimized
 
 /* =========================
 7. PROPERTY 2
-(Button Area & Pure Reset)
+(Button Area)
 ========================= */
 
 .notion-collection-list__item-property:nth-child(2){
@@ -113,16 +113,8 @@ Notion + Super.so optimized
   justify-content:flex-start!important;
 }
 
-/* 🚨 속성 2번 자식들 중, 우리가 디자인할 버튼 클래스(brown, orange)를 "제외"한 모든 상위/하위 껍데기들의 기본 배경색과 모서리를 완벽하게 투명화합니다. */
-.notion-collection-list__item-property:nth-child(2) *:not([class*="brown"]):not([class*="orange"]) {
-  background: transparent !important;
-  background-color: transparent !important;
-  border-radius: 0px !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
 /* reset */
+
 .notion-collection-list__item-property:nth-child(2),
 .notion-collection-list__item-property:nth-child(2) *{
   text-decoration:none!important;
@@ -143,7 +135,6 @@ Notion + Super.so optimized
   height:var(--ticket-height)!important;
 
   background:var(--black-btn)!important;
-  background-color:var(--black-btn)!important; /* 명시적 보정 */
 
   border-radius:4px!important;
 
@@ -156,9 +147,14 @@ Notion + Super.so optimized
   -webkit-text-fill-color:#fff!important;
 
   font-size:11px!important;
-  
-  /* 버튼 내부 텍스트의 배경 겹침 방지 */
-  background:transparent!important;
-  background-color:transparent!important;
 }
+
+
+
+
+
+
+
+
+
 
