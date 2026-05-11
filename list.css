@@ -177,96 +177,118 @@ Notion + Super.so optimized
   font-size:11px!important;
 }
 
-/* =========================
-10. MOBILE
-========================= */
 
-@media (max-width:768px){
 
-  /* 리스트 아이템 */
-  .notion-collection-list__item{
-    display:flex!important;
-    flex-direction:column!important;
 
-    gap:10px!important;
+/* ==========================================
+10. MOBILE (모바일 전용 완벽 정렬 레이아웃)
+========================================== */
 
-    padding:16px 0!important;
+@media (max-width: 768px) {
+
+  /* 1. 리스트 아이템 베이스 정렬 */
+  .notion-collection-list__item {
+    display: flex !important;
+    flex-direction: column !important; /* 위아래로 제목과 내용을 먼저 분리 */
+    gap: 8px !important;
+    padding: 16px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* 제목 */
-  .notion-collection-list__item .notion-item-title{
-    min-width:100%!important;
-    max-width:100%!important;
+  /* 2. 제목 (모바일 15px 고정 및 불필요한 아이콘 영역 제어) */
+  .notion-collection-list__item .notion-item-title {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .notion-collection-list__item .notion-item-title a {
+    display: block !important;
+    width: 100% !important;
   }
 
-  /* 속성 그룹 → grid 강제 */
-  .notion-collection-list__item-properties{
-
-    display:grid!important;
-
-    grid-template-columns:
-      minmax(0,1fr)
-      85px!important;
-
-    column-gap:12px!important;
-
-    width:100%!important;
-
-    padding:0!important;
-    margin:0!important;
-
-    align-items:start!important;
+  /* 3. 속성 전체 감싸개 (유연한 Flex 2분할 구조로 개편) */
+  .notion-collection-list__item-properties {
+    display: flex !important;
+    flex-direction: row !important; /* 좌우 배치 */
+    align-items: flex-start !important; /* 위쪽 정렬 고정 */
+    justify-content: space-between !important; /* 양끝 정렬 */
+    
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
   }
 
-  /* 속성1 */
-  .notion-collection-list__item-property:nth-child(1){
-
-    min-width:0!important;
-    max-width:none!important;
-
-    margin:0!important;
-    padding:0!important;
-
-    text-align:left!important;
-
-    white-space:normal!important;
-
-    overflow:visible!important;
+  /* 4. 속성 1 (위치 / 시간 텍스트 영역) */
+  .notion-collection-list__item-property:nth-child(1) {
+    flex: 1 !important; /* 가용 가능한 모든 공간을 유연하게 차지 */
+    min-width: 0 !important; /* flex 하단에서 자식 글자가 넘칠 때 팅기는 현상 방지 */
+    max-width: calc(100% - 97px) !important; /* 버튼 폭(85px) + 여백(12px)을 제외한 영역을 안전하게 확보 */
+    
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+    white-space: normal !important;
   }
 
-  .notion-collection-list__item-property:nth-child(1) *{
-
-    font-size:11px!important;
-    line-height:1.45!important;
-
-    white-space:normal!important;
-
-    word-break:keep-all!important;
-
-    overflow:visible!important;
-    text-overflow:unset!important;
+  .notion-collection-list__item-property:nth-child(1) *,
+  .notion-collection-list__item-property:nth-child(1) span {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    color: var(--text-main) !important;
+    white-space: normal !important;
+    word-break: keep-all !important; /* 한글 단어 깨짐 방지 */
+    overflow: visible !important;
+    text-overflow: unset !important;
   }
 
-  /* 속성2 */
-  .notion-collection-list__item-property:nth-child(2){
-
-    width:85px!important;
-
-    display:flex!important;
-    justify-content:flex-end!important;
-
-    margin:0!important;
-    padding:0!important;
+  /* 5. 속성 2 (오른쪽 버튼 영역 고정) */
+  .notion-collection-list__item-property:nth-child(2) {
+    flex: 0 0 85px !important; /* 85px 너비를 무조건 강제 고정 */
+    width: 85px !important;
+    min-width: 85px !important;
+    max-width: 85px !important;
+    
+    display: inline-flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    
+    margin: 0 0 0 12px !important; /* 왼쪽 텍스트 영역과의 안전 거리 확보 */
+    padding: 0 !important;
   }
 
-  /* 버튼 */
+  /* 6. 버튼 사이즈 리셋 및 찌그러짐 방지 */
   .notion-collection-list__item-property:nth-child(2) [class*="brown"],
-  .notion-collection-list__item-property:nth-child(2) [class*="orange"]{
-
-    width:85px!important;
-    height:27px!important;
-
-    flex-shrink:0!important;
+  .notion-collection-list__item-property:nth-child(2) [class*="orange"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    width: 85px !important;
+    min-width: 85px !important;
+    height: 27px !important;
+    min-height: 27px !important;
+    
+    border-radius: 4px !important;
+    flex-shrink: 0 !important; /* 부모 flex 압박 속에서도 찌그러짐 절대 불허 */
+    box-sizing: border-box !important;
   }
 
+  /* 버튼 내부 텍스트 정밀 조율 */
+  .notion-collection-list__item-property:nth-child(2) [class*="brown"] *,
+  .notion-collection-list__item-property:nth-child(2) [class*="orange"] * {
+    font-size: 10px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+  }
 }
+
+
+
