@@ -1,8 +1,6 @@
 /*==========================================
-09-1📌 텍스트 콜아웃 제어 (주석용) - 완결 패치본
-==========================================*/
-
-/* [1] 파란색 콜아웃을 투명화 */
+09-1📌 텍스트 콜아웃 제어 (주석용)*/
+/* [1] 파란색 콜아웃을 투명화*/
 .notion-callout[class*="blue"] {
   background-color: transparent !important; 
   border: 0px solid transparent !important;  
@@ -10,7 +8,6 @@
   padding: 0px !important;
   color: #37352f !important;
 }
-
 /* [2] 글자 크기 제어 (주석용 0.8rem)----- */
 .notion-callout[class*="blue"] *,
 .notion-callout[class*="blue"] *::before,
@@ -20,43 +17,30 @@
 .notion-callout[class*="blue"] span,
 .notion-callout[class*="blue"] li,
 .notion-callout[class*="blue"] strong,
-.notion-callout[class*="blue"] b,
-/* 🚨 [핵심 패치] 파란 콜아웃 내부의 code 태그 및 하위 링크 폰트 크기 강제 동기화 */
-.notion-callout[class*="blue"] code,
-.notion-callout[class*="blue"] code * {
+.notion-callout[class*="blue"] b {
   font-size: 0.8rem !important;    
   line-height: 1.6 !important;     
 }
-
 [class*="blue"] .notion-text-block,
 [class*="blue"] [contenteditable="false"] {
   font-size: 0.8rem !important;
 }
-
-/*==========================================
-🚨 모바일 제어 미디어쿼리 (768px 이하)
-==========================================*/
 @media (max-width: 768px) {
   .notion-callout[class*="blue"] *,
   .notion-callout[class*="blue"] p,
   .notion-callout[class*="blue"] span,
   .notion-callout[class*="blue"] li,
   .notion-callout[class*="blue"] strong,
-  .notion-callout[class*="blue"] div,
-  /* 🚨 [핵심 패치] 모바일 환경에서도 파란 콜아웃 내부의 code 태그를 빼놓지 않고 저격 */
-  .notion-callout[class*="blue"] code,
-  .notion-callout[class*="blue"] code * {
+  .notion-callout[class*="blue"] div {
     font-size: 0.75rem !important; 
     line-height: 1.6 !important;
     margin-bottom: 4px !important;
   }
-  
   .notion-callout[class*="blue"] ul, 
   .notion-callout[class*="blue"] ol {
     padding-left: 18px !important;
     margin-top: 8px !important;
   }
-  
   .notion-callout[class*="blue"] {
     padding: 0px !important;
     margin-bottom: -15px !important; 
