@@ -240,7 +240,7 @@
     .notion-callout[class*="green"]:has([class*="h1"]) .notion-collection-card__property:nth-child(1) * {
         font-size: 10px !important;
         font-weight: 400 !important;
-        margin-bottom: -3px !important;
+        margin-bottom: -8px !important;
     }
     /* 모바일 속성 2 여백 설정 */
     .notion-callout[class*="green"]:has(h1) .notion-collection-card__property:nth-child(2),
