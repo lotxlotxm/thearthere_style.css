@@ -283,7 +283,7 @@
 }
 @media (max-width: 768px) {
   .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])) .notion-collection-gallery {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
   }
 }
