@@ -101,40 +101,72 @@
 
 
 /*=========================================
-⚪[우측 정렬 트리거] 그레이 콜아웃 + 불렛 리스트(ul/li)
+⚪[우측 정렬 트리거] 그레이 콜아웃 + 불렛 리스트
+   PC: 우측 정렬 / 모바일: 좌측 정렬 (여백 제거 공통)
 =========================================*/
-/* 1. 콜아웃 본체 및 텍스트 우측 정렬 */
-.notion-callout[class*="gray"]:has(ul) {
-    text-align: right !important;
-}
 
-/* 2. 불렛 리스트 구조 우측 정렬 */
+/* [1] 공통 설정: 여백 제거 및 아이콘 숨김 */
+.notion-callout[class*="gray"]:has(ul) {
+    padding: 0 !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+.notion-callout[class*="gray"]:has(ul) .notion-callout__content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.notion-callout[class*="gray"]:has(ul) .notion-callout__icon {
+    display: none !important;
+}
 .notion-callout[class*="gray"]:has(ul) ul {
-    list-style: none !important;      /* 우측 정렬 시 불렛 점이 어색하므로 제거 */
+    list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-end !important; /* 리스트 아이템을 우측으로 밀기 */
 }
-
-/* 3. 개별 리스트 아이템 정렬 */
 .notion-callout[class*="gray"]:has(ul) li {
-    text-align: right !important;
     width: 100% !important;
-    justify-content: flex-end !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* 4. 내부 텍스트 컨테이너 정렬 강제화 */
-.notion-callout[class*="gray"]:has(ul) .notion-callout__content {
-    width: 100% !important;
-    text-align: right !important;
+/* [2] PC 버전 (769px 이상): 우측 정렬 적용 */
+@media (min-width: 769px) {
+    .notion-callout[class*="gray"]:has(ul) {
+        text-align: right !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) ul {
+        align-items: flex-end !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) li {
+        text-align: right !important;
+        justify-content: flex-end !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) .notion-callout__content {
+        text-align: right !important;
+    }
 }
 
-/* 5. 아이콘 제거 (선택 사항: 깔끔한 정렬을 위함) */
-.notion-callout[class*="gray"]:has(ul) .notion-callout__icon {
-    display: none !important;
+/* [3] 모바일 버전 (768px 이하): 좌측 정렬 유지 */
+@media (max-width: 768px) {
+    .notion-callout[class*="gray"]:has(ul) {
+        text-align: left !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) ul {
+        align-items: flex-start !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) li {
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+    .notion-callout[class*="gray"]:has(ul) .notion-callout__content {
+        text-align: left !important;
+    }
 }
+
 
 
 
