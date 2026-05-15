@@ -99,6 +99,48 @@
     width: 100% !important;
 }
 
+
+/*=========================================
+⚪[우측 정렬 트리거] 그레이 콜아웃 + 불렛 리스트(ul/li)
+=========================================*/
+/* 1. 콜아웃 본체 및 텍스트 우측 정렬 */
+.notion-callout[class*="gray"]:has(ul) {
+    text-align: right !important;
+}
+
+/* 2. 불렛 리스트 구조 우측 정렬 */
+.notion-callout[class*="gray"]:has(ul) ul {
+    list-style: none !important;      /* 우측 정렬 시 불렛 점이 어색하므로 제거 */
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important; /* 리스트 아이템을 우측으로 밀기 */
+}
+
+/* 3. 개별 리스트 아이템 정렬 */
+.notion-callout[class*="gray"]:has(ul) li {
+    text-align: right !important;
+    width: 100% !important;
+    justify-content: flex-end !important;
+}
+
+/* 4. 내부 텍스트 컨테이너 정렬 강제화 */
+.notion-callout[class*="gray"]:has(ul) .notion-callout__content {
+    width: 100% !important;
+    text-align: right !important;
+}
+
+/* 5. 아이콘 제거 (선택 사항: 깔끔한 정렬을 위함) */
+.notion-callout[class*="gray"]:has(ul) .notion-callout__icon {
+    display: none !important;
+}
+
+
+
+
+
+
 /* ==================================================== */
 /* 🟧 주황색 콜아웃 바레이션 : 텍스트 숨김 전용 🟧 */
 /*====[타입1] 📌 주황색 콜아웃 : h1, h2 숨김===*/
