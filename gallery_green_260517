@@ -426,11 +426,12 @@
 
 /*==========================================
 🟩 [타입 D] 녹색 콜아웃 + 글머리 기호(불렛) 트리거 
-(원형 도시 버튼)
 ----------------------------*/
-/* [0] 🚨 글머리 기호 트리거 숨김 */
-.notion-callout[class*="green"]:has(.notion-list-bullet) .notion-list-bullet,
-.notion-callout[class*="green"]:has([class*="notion-list-bullet"]) [class*="notion-list-bullet"] {
+/* [0] 🚨 글머리 기호 트리거 및 내부 텍스트 컴포넌트 완전 숨김 */
+.notion-callout[class*="green"]:has([class*="bullet"]) [class*="bullet"],
+.notion-callout[class*="green"]:has([class*="bullet"]) .notion-bulleted_list-block,
+.notion-callout[class*="green"]:has([class*="bullet"]) .notion-list-bullet,
+.notion-callout[class*="green"]:has([class*="bullet"]) .notion-heading {
     position: absolute !important;
     width: 1px !important;
     height: 1px !important;
@@ -440,6 +441,7 @@
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
+    display: none !important; /* 물리적인 공간과 렌더링을 완전히 차단 */
 }
 
 /*[1] 슬라이드 기능 (가로 스크롤) */
