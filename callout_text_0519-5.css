@@ -12,7 +12,7 @@
 }
 
   .notion-callout[class*="blue"] .notion-divider {
-    margin-top: 5px !important;
+    margin-top: 12px !important;
     margin-bottom: 10px !important;
     border-top:   0px solid rgba(0,0,0,0.1) !important;
   }
@@ -25,7 +25,7 @@
 .notion-callout[class*="blue"] span,
 .notion-callout[class*="blue"] li {
   font-size: 0.8rem !important;    
-  line-height: 1.5 !important;
+  line-height: 2 !important;
   margin: 0 !important;
 }
 
@@ -55,16 +55,22 @@
     padding-bottom: 0 !important;
   }
   
-  /* 2. 내부 텍스트 밀착 */
-  .notion-callout[class*="blue"] > div > * {
+/* 2. 내부 텍스트 밀착 및 모바일 행간 강제 적용 */
+  .notion-callout[class*="blue"] .notion-text,
+  .notion-callout[class*="blue"] .notion-text-block,
+  .notion-callout[class*="blue"] div,
+  .notion-callout[class*="blue"] span,
+  .notion-callout[class*="blue"] p,
+  .notion-callout[class*="blue"] li {
     margin-top: 0 !important;
     margin-bottom: 0px !important;
+    line-height: 1.4 !important; 
   }
 
   /* 3. 구분선 제어 (이제 확실히 모바일 전용이 됨) */
   .notion-callout[class*="blue"] .notion-divider {
-    margin-top: 20px !important; 
-    margin-bottom: 15px !important; 
+    margin-top: 15px !important; 
+    margin-bottom: 10px !important; 
     height: 1px !important;
     border-top: 0px solid rgba(0,0,0,0.1) !important;
   }
