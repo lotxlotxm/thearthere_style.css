@@ -23,34 +23,33 @@
   margin: 0 !important; /* 블록 내부 여백 초기화 */
 }
 
-/* [3] 모바일 환경 전용 밀착 제어 (768px 이하) */
+
+/* 09-1📌 파란색 콜아웃 모바일 밀착 통합 제어 */
 @media (max-width: 768px) {
-  .notion-callout[class*="blue"] {
-    margin-bottom: 2px !important; /* 콜아웃 자체 여백 축소 */
-    width: 100% !important;
-  }
-
-  .notion-callout[class*="blue"] *,
-  .notion-callout[class*="blue"] p,
-  .notion-callout[class*="blue"] span,
-  .notion-callout[class*="blue"] div,
-  .notion-callout[class*="blue"] li {
-    font-size: 0.75rem !important; 
-    line-height: 1.4 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0px !important; /* 줄 간격 강제 압축 */
-  }
-
-  /* 목록 스타일 유지 */
-  .notion-callout[class*="blue"] ul, 
-  .notion-callout[class*="blue"] ol {
-    padding-left: 15px !important;
-    margin: 2px 0 !important;
-  }
   
-  /* 구분선 축소 */
+  /* 1. 콜아웃 내부 레이아웃 및 블록 간격 통합 제어 */
+  .notion-callout[class*="blue"] .notion-column-list,
+  .notion-callout[class*="blue"] .notion-column,
+  .notion-callout[class*="blue"] .notion-text,
+  .notion-callout[class*="blue"] > div > div {
+    margin-top: 0 !important;
+    margin-bottom: -2px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* 2. 내부 텍스트 블록 밀착 */
+  .notion-callout[class*="blue"] > div > * {
+    margin-top: 0 !important;
+    margin-bottom: 2px !important; /* 4px보다 좀 더 타이트하게 */
+  }
+
+  /* 3. 구분선(Divider) 확실한 제어 */
   .notion-callout[class*="blue"] .notion-divider {
-    margin: 2px 0 !important;
+    margin-top: 15px !important; 
+    margin-bottom: 10px !important; 
+    height: 1px !important;
+    border-top: 0px solid rgba(0,0,0,0.1) !important;
   }
 }
 /*==========================================
