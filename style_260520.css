@@ -6,7 +6,7 @@
 -------------------------------------------*/
 /* [1] 폰트 및 그리드 제어판 */
 :root {
-  --font-family: 'Noto Sans KR', -apple-system, sans-serif !important;
+  --font-family: 'Poppins', -apple-system, sans-serif !important;
    /* PC 수치 */
   --pc-h1: 48px; --pc-h2: 28px; --pc-h3: 22px; --pc-body: 16px; --pc-caption: 11px;
   --pc-lh-h1: 1.2; --pc-lh-h2: 1.2; --pc-lh-h3: 1.3; --pc-lh-body: 1.6; --pc-lh-caption: 1.5;
@@ -14,25 +14,11 @@
   --mb-h1: 32px; --mb-h2: 22px; --mb-h3: 18px; --mb-body: 14px; --mb-caption: 8px;
   --mb-lh-h1: 1.2; --mb-lh-h2: 1.5; --mb-lh-h3: 1.2; --mb-lh-body: 1.6; --mb-lh-caption: 1.2;
 /* 공통 설정 */
-  --h1-weight: 900;
-  --h2-weight: 900;
-  --h3-weight: 700;
+  --h1-weight: 500;
+  --h2-weight: 500;
+  --h3-weight: 500;
+  --body-weight: 300; 
   --banner-gap: 20px;
-}
-
-
-/* --- 본문 및 링크 굵기 강제 적용 --- */
-.notion-text, 
-.notion-text *, 
-.notion-list li, 
-.notion-list li *,
-.notion-link, 
-p,
-.notion-toggle,
-.notion-toggle summary,
-.notion-toggle summary span,
-.notion-toggle__content { 
-  font-weight: var(--body-weight) !important; 
 }
 
 
