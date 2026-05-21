@@ -1,0 +1,167 @@
+/*==========================================
+   [목차]
+   [1] 폰트 및 그리드 제어판 (:root 변수)
+   [2] 요소별 스타일(H1~Body, PC/모바일 통합)
+   [3] 전역 레이아웃 제어
+-------------------------------------------*/
+/* [1] 폰트 및 그리드 제어판 */
+:root {
+  --font-family: 'Noto Sans KR', -apple-system, sans-serif !important;
+   /* PC 수치 */
+  --pc-h1: 42px; --pc-h2: 28px; --pc-h3: 22px; --pc-body: 16px; --pc-caption: 11px;
+  --pc-lh-h1: 1.2; --pc-lh-h2: 1.2; --pc-lh-h3: 1.3; --pc-lh-body: 1.6; --pc-lh-caption: 1.5;
+/* 모바일 수치 */
+  --mb-h1: 27px; --mb-h2: 22px; --mb-h3: 18px; --mb-body: 14px; --mb-caption: 8px;
+  --mb-lh-h1: 1.2; --mb-lh-h2: 1.5; --mb-lh-h3: 1.2; --mb-lh-body: 1.6; --mb-lh-caption: 1.2;
+/* 공통 설정 */
+  --h1-weight: 900;
+  --h2-weight: 900;
+  --h3-weight: 700;
+  --banner-gap: 20px;
+}
+
+/* 1. 폰트 기본 설정 */
+/* [★ 최종 교정] * 선택자의 무차별적인 !important 덮어쓰기를 제거하고, html과 body 및 하위 텍스트 레이어에만 폰트를 안전하게 상속시켜 strong(볼드) 엔진을 완벽히 살려냅니다. */
+html, body, .notion, .notion-app, .notion-page-content, .notion-text, p, span, a, div, td, th {
+  font-family: var(--font-family) !important;
+}
+
+/* 코드 블록 내부의 폰트 오염 방지 처리는 명시적으로 분리 유지 */
+.notion-code-block, .notion-code-block * {
+  font-family: monospace !important;
+}
+
+/* 2. 요소별 스타일 제어 (H1 ~ Caption) */
+/* --- H1 제목 --- */
+h1, .notion-h1, .notion-header__title, h1 * {  
+  font-size: var(--pc-h1) !important; font-weight: var(--h1-weight) !important;  
+  line-height: var(--pc-lh-h1) !important; margin-top: var(--pc-h1-mt) !important; margin-bottom: var(--pc-h1-mb) !important;  
+}
+@media (max-width: 768px) {
+  h1, .notion-h1, .notion-header__title, h1 * {  
+    font-size: var(--mb-h1) !important; line-height: var(--mb-lh-h1) !important;  
+    margin-top: var(--mb-h1-mt) !important; margin-bottom: var(--mb-h1-mb) !important;  
+  }
+}
+
+/* --- H2 제목 --- */
+h2, .notion-h2, h2 * {  
+  font-size: var(--pc-h2) !important; font-weight: var(--h2-weight) !important;  
+  line-height: var(--pc-lh-h2) !important; margin-top: var(--pc-h2-mt) !important; margin-bottom: var(--pc-h2-mb) !important;  
+}
+@media (max-width: 768px) {
+  h2, .notion-h2, h2 * {  
+    font-size: var(--mb-h2) !important; line-height: var(--mb-lh-h2) !important;  
+    margin-top: var(--mb-h2-mt) !important; margin-bottom: var(--mb-h2-mb) !important;  
+  }
+}
+
+/* --- H3 제목 --- */
+h3, .notion-h3, h3 * {  
+  font-size: var(--pc-h3) !important; font-weight: var(--h3-weight) !important;  
+  line-height: var(--pc-lh-h3) !important; margin-top: var(--pc-h3-mt) !important; margin-bottom: var(--pc-h3-mb) !important;  
+}
+@media (max-width: 768px) {
+  h3, .notion-h3, h3 * {  
+    font-size: var(--mb-h3) !important; line-height: var(--mb-lh-h3) !important;  
+    margin-top: var(--mb-h3-mt) !important; margin-bottom: var(--mb-h3-mb) !important;  
+  }
+}
+
+/* --- 본문 및 링크 --- */
+.notion-text, 
+.notion-text *, 
+.notion-list li, 
+.notion-link, 
+p { 
+  font-size: var(--pc-body) !important; 
+  line-height: var(--pc-lh-body) !important; 
+}
+
+@media (max-width: 768px) {
+  .notion-text, 
+  .notion-text *, 
+  .notion-list li, 
+  .notion-link, 
+  p { 
+    font-size: var(--mb-body) !important; 
+    line-height: var(--mb-lh-body) !important; 
+  }
+}
+
+/* --- 노션 토글 컴포넌트 폰트 크기 명시적 제어 --- */
+.notion-toggle,
+.notion-toggle summary,
+.notion-toggle summary span,
+.notion-toggle__content {
+  font-size: var(--pc-body) !important;
+  line-height: var(--pc-lh-body) !important;
+}
+
+@media (max-width: 768px) {
+  .notion-toggle,
+  .notion-toggle summary,
+  .notion-toggle summary span,
+  .notion-toggle__content {
+    font-size: var(--mb-body) !important;
+    line-height: var(--mb-lh-body) !important;
+  }
+}
+
+/* [★ 전역 볼드 정상화 핵심 추가] 본문, 리스트, 토글 내에서 사용자가 '직접 제어한 볼드 속성' 구출 */
+.notion-text strong, .notion-text b,
+.notion-list li strong, .notion-list li b,
+.notion-toggle strong, .notion-toggle b,
+.notion-table td strong, .notion-table td b,
+p strong, p b,
+[class*="bold"], [style*="font-weight: bold"], [style*="font-weight:700"] {
+  font-weight: 700 !important;
+}
+
+/* 아이콘 및 SVGs */
+.notion-toggle__icon,
+.notion-header__icon,
+svg {
+  font-size: inherit !important; 
+}
+
+/* --- 캡션 --- */
+.notion-caption, .notion-image-caption, .notion-caption *, .notion-image-caption * {  
+  font-size: var(--pc-caption) !important; line-height: var(--pc-lh-caption) !important;  
+}
+@media (max-width: 768px) {
+  .notion-caption, .notion-image-caption, .notion-caption *, .notion-image-caption * {  
+    font-size: var(--mb-caption) !important; line-height: var(--mb-lh-caption) !important;  
+  }
+}
+
+/* 캡션 글자 정렬 제어 */
+.notion-caption, 
+.notion-image-caption {
+  display: block !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+
+/* 캡션 내 링크 스타일 */
+.notion-caption a, 
+.notion-image-caption a {
+  display: inline !important;
+  text-decoration: underline !important;
+  color: inherit !important;
+}
+
+/* [2] 전역 레이아웃 제어 */
+.notion-page-content {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* 토글 블록 전체의 호버 배경색 강제 제거 */
+.notion-toggle:hover, 
+.notion-block-toggle:hover,
+[class*="notion-toggle"]:hover {
+    background-color: transparent !important;
+}
