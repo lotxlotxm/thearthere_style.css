@@ -2101,4 +2101,5 @@ margin: 0 !important; padding: 0 !important; border: none !important;
   .notion-column > *:first-child {
     margin-top: 0 !important;
   }
+}
 
