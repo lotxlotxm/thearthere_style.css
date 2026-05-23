@@ -122,7 +122,7 @@
 
 /*=========================================
 🟩 [타입 A] 녹색 콜아웃 + 인라인 코드 트리거
-    -> 복합 가로 슬라이더형 (일반 인라인코드 영역 구출본)
+    -> PC: 일반 격자 배열 / 모바일: 1줄 가로 슬라이더
 =========================================*/
 
 /* 🚨 확실한 타겟팅: 오직 내부에 '갤러리 뷰'를 품고 있으면서 트리거용 코드가 있는 경우만 한정해서 숨김 */
@@ -137,22 +137,13 @@
     overflow: hidden !important;
 }
 
-/* 갤러리 슬라이드 설정 */
+/* [PC 버전] 갤러리 격자 배열 (기본 4열 배치) */
 .notion-callout[class*="green"]:has(code) .notion-collection-gallery {
     display: grid !important;
-    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-flow: column !important;
-    grid-auto-columns: calc((100% - 48px) / 4.06) !important; 
-    gap: 10px !important;
+    grid-template-columns: repeat(4, 1fr) !important; 
+    gap: 16px !important;
     background: transparent !important;
-    overflow-x: auto !important;
-    scrollbar-width: none !important;
-    scroll-snap-type: x mandatory !important;
-}
-
-/* 스크롤바 숨김 */
-.notion-callout[class*="green"]:has(code) .notion-collection-gallery::-webkit-scrollbar {
-    display: none !important;
+    overflow-x: visible !important;
 }
 
 /* 카드 스타일 */
@@ -161,7 +152,6 @@
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
-    scroll-snap-align: start !important;
 }
 
 .notion-callout[class*="green"]:has(code) .notion-collection-card__content {
@@ -183,7 +173,6 @@
 }
 
 /* 📌 속성 스타일링 */
-
 /* --- 속성 1: 제목/강조 --- */
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(1),
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(1) * {
@@ -195,7 +184,7 @@
     margin-bottom: 4px !important;
 }
 
-/* --- 속성 2: 설명 (기존) --- */
+/* --- 속성 2: 설명 --- */
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(2),
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(2) * {
     font-size: 12px !important;
@@ -206,7 +195,7 @@
     margin-bottom: -6px !important;
 }
 
-/* --- 속성 3: 추가 정보 (속성 2와 동일 스타일) --- */
+/* --- 속성 3: 추가 정보 --- */
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(3),
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(3) * {
     font-size: 12px !important;
@@ -217,7 +206,7 @@
     margin-bottom: 0px !important;
 }
 
-/* --- 속성 4: 태그 (기존 속성 3에서 변경) --- */
+/* --- 속성 4: 태그 --- */
 .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(4) .notion-pill {
     background: transparent !important; 
     padding: 0 !important;
@@ -228,23 +217,32 @@
     text-transform: uppercase !important;
 }
 
-
 /* 📱 모바일 대응 (768px 이하) */
 @media (max-width: 768px) {
+    /* [모바일] 1줄 가로 슬라이더 형태로 완전 전환 */
     .notion-callout[class*="green"]:has(code) .notion-collection-gallery {
         display: grid !important;
         grid-template-columns: none !important;
-        grid-template-rows: repeat(2, 1fr) !important;
+        grid-template-rows: none !important;
         grid-auto-flow: column !important;
+        /* 화면당 1.5개 노출하여 우측 스크롤 힌트 제공 */
         grid-auto-columns: calc((100% - 10px) / 1.5) !important; 
-        gap: 0px 5px !important;
+        gap: 12px !important;
+        overflow-x: auto !important;
+        scrollbar-width: none !important;
+        scroll-snap-type: x mandatory !important;
+    }
+
+    .notion-callout[class*="green"]:has(code) .notion-collection-gallery::-webkit-scrollbar {
+        display: none !important;
     }
 
     .notion-callout[class*="green"]:has(code) .notion-collection-card {
         width: 100% !important; 
         max-width: 100% !important;
-        min-width: 0 !important;
+        min-width: unset !important;
         flex: none !important;
+        scroll-snap-align: start !important;
     }
 
     .notion-callout[class*="green"]:has(code) .notion-collection-card__content {
@@ -267,7 +265,6 @@
         margin-bottom: -8px !important;
     }
 
-    /* 모바일 속성 3 (새로 추가된 속성) */
     .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(3),
     .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(3) * {
         font-size: 10px !important;
@@ -275,7 +272,6 @@
         margin-bottom: 0px !important;
     }
 
-    /* 모바일 속성 4: 태그 (기존 속성 3에서 변경) */
     .notion-callout[class*="green"]:has(code) .notion-collection-card__property:nth-child(4) .notion-pill {
         font-size: 9px !important; 
         font-weight: 700 !important;
