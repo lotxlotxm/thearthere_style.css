@@ -121,7 +121,7 @@
 /*🟩그린 콜아웃 트리거 5타입 버전 (깃허브)*/
 
 /*===========================================
-🟩 [타입 B] 녹색 콜아웃 기본형 
+🟩 [타입 A] 녹색 콜아웃 기본형 
 (6열 - h1~h4, 인라인코드, 토글, 인용, 불렛 차단막 추가)
 ===========================================*/
 
@@ -141,7 +141,7 @@
   transition: opacity 0.3s ease;
 }
 
-/* 📌 타입 B 전용 배경색 및 간격 설정 */
+/* 📌 타입 A 전용 배경색 및 간격 설정 */
 .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-card__content {
 background: transparent !important;
   padding: 8px 4px !important; 
@@ -167,7 +167,7 @@ display: none !important;
 
 
 /*=========================================
-🟩 [타입 A] 녹색 콜아웃 + 인라인 코드 트리거
+🟩 [타입 B] 녹색 콜아웃 + 인라인 코드 트리거
     -> PC: 일반 격자 배열 / 모바일: 1줄 가로 슬라이더
 =========================================*/
 
