@@ -124,9 +124,7 @@
 🟩 [타입 A] 녹색 콜아웃 기본형 
 (6열 - h1~h4, 인라인코드, 토글, 인용, 불렛 차단막 추가)
 ===========================================*/
-
 /* 🚨 확실한 불렛 차단막을 결합하여 타입 D가 켜졌을 때 가중치 싸움으로 침범하는 것을 원천 차단 */
-
 .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-gallery {
   display: grid !important;
   grid-template-columns: repeat(6, 1fr) !important; 
@@ -143,12 +141,12 @@
 
 /* 📌 타입 A 전용 배경색 및 간격 설정 */
 .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-card__content {
-background: transparent !important;
+  background: transparent !important;
   padding: 8px 4px !important; 
 }
 
 .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-card__property:nth-child(4) {
-display: none !important;
+  display: none !important;
 }
 
 .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-card__cover,
@@ -158,19 +156,16 @@ display: none !important;
 }
 
 @media (max-width: 768px) {
-.notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-gallery {
+  .notion-callout[class*="green"]:not(:has(h1)):not(:has([class*="h1"])):not(:has(h2)):not(:has([class*="h2"])):not(:has(h3)):not(:has(h4)):not(:has(code)):not(:has(.notion-toggle)):not(:has(blockquote)):not(:has(.notion-list-bullet)):not(:has([class*="bullet"])) .notion-collection-gallery {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 8px !important;
   }
 }
 
-
-
 /*=========================================
 🟩 [타입 B] 녹색 콜아웃 + 인라인 코드 트리거
     -> PC: 일반 격자 배열 / 모바일: 1줄 가로 슬라이더
 =========================================*/
-
 /* 🚨 확실한 타겟팅: 오직 내부에 '갤러리 뷰'를 품고 있으면서 트리거용 코드가 있는 경우만 한정해서 숨김 */
 .notion-callout[class*="green"]:has(.notion-collection-gallery):has(code) > .notion-callout__content > .notion-text:has(code),
 .notion-callout[class*="green"]:has(.notion-collection-gallery):has(code) > .notion-callout__content > code {
@@ -329,8 +324,6 @@ display: none !important;
     }   
 }
 
-
-
 /*===========================================
 🟩 [타입 C] 녹색 콜아웃+ 인용 트리거
     -> 기본 격자형 4열 배열 (화이트 카드 복구 + 속성 3 구분선 완결본)*/
@@ -357,7 +350,7 @@ display: none !important;
     gap: 8px !important;
     width: 100% !important;
     background: transparent !important;
-    overflow: visible !important;
+    overflow-x: visible !important;
 }
 
 /* [카드 베이스] 공통 베이스의 화이트 스타일 강제 유지 */
@@ -378,7 +371,7 @@ display: none !important;
 /* 카드 내부 콘텐츠 및 속성 구역 패딩 복구 */
 .notion-callout[class*="green"]:has(blockquote) .notion-collection-card__content,
 .notion-callout[class*="green"]:has([class*="blockquote"]) .notion-collection-card__content {
-    background: #fff !important; /* 화이트 카드로 명확하게 고정 */
+    background: #fff !important; 
     padding: 10px 14px !important; 
     display: flex !important;
     flex-direction: column !important;
@@ -420,7 +413,6 @@ display: none !important;
         gap: 6px !important;
     }
 }
-
 
 /*==========================================
 🟩 [타입 D] 녹색 콜아웃 + 글머리 기호(불렛) 트리거 
@@ -481,8 +473,7 @@ display: none !important;
     -webkit-line-clamp: unset !important;
     max-height: none !important;
 }
-/* [4] 더보기 표시 정렬
-보라색 콜아웃 내 이미지가 없는 경우 */
+/* [4] 더보기 표시 정렬 보라색 콜아웃 내 이미지가 없는 경우 */
 /* 1. 이미지 영역은 깔끔하게 소멸 */
 .notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card:not(:has(.notion-collection-card__cover)) .notion-collection-card__cover {
     display: none !important;
@@ -496,130 +487,4 @@ display: none !important;
     justify-content: center !important;
 }
 /* 3. 제목을 카드의 정중앙에 배치 */
-.notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card:not(:has(.notion-collection-card__cover)) .notion-collection-card__content {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, 0%) !important;
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-/* 4. 제목 스타일 최종 보정 */
-.notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card:not(:has(.notion-collection-card__cover)) .notion-item-title {
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: center !important;
-    display: block !important;
-    width: 100% !important;
-}
-@media (max-width: 768px) {
-    .notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card {
-        flex: 0 0 100px !important; /* 모바일에서 더 콤팩트하게 */
-        min-width: 100px !important;
-    }
-    .notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card__property:first-child * {
-        font-size: 14px !important;
-    }
-}
-
-
-/*------------------------------------------
-🟩 [타입 E] 녹색 콜아웃+ 토글 트리거
-    -> 오버랩+가로형 : 온라인 전시 (텍스트형 토글과 충돌 분리 완료)
-  -----------------------------------------*/
-/* [0] 🚨 오직 '전시 갤러리'가 들어있는 녹색 토글만 제목을 숨김 (일반 텍스트형 토글 사수) */
-.notion-callout[class*="green"]:has(.notion-collection-gallery) .notion-toggle > div:first-child {
-    display: none !important;
-}
-
-/* 1. 그리드 레이아웃 설정 */
-/*PC 2열 */
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-gallery {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-}
-/* 2. 카드 전체 설정 및 비율 */
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card {
-    position: relative !important;
-    background: transparent !important;
-    border: none !important;
-    overflow: hidden !important;
-    border-radius: 15px !important;
-    aspect-ratio: 5 / 2 !important; /* 비율 유지 */
-}
-/* 3. */
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__cover,
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__cover > div,
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__cover img {
-    height: 100% !important;
-    width: 100% !important;
-    max-height: 100% !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    object-fit: cover !important;
-    transition: transform 0.4s ease-in-out !important; 
-    will-change: transform;
-}
-
-/* 4.호버 효과*/
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card:hover .notion-collection-card__cover,
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card:hover .notion-collection-card__cover img {
-    transform: scale(1.1) !important;
-}
-
-/* 5. 텍스트 레이어 */
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__content {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 60% !important;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    padding: 0 15px 15px 15px !important;
-    z-index: 10 !important;
-    pointer-events: none;
-    text-align: center !important;
-}
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-page-gallery-wrapper .notion-collection-card__property:first-child,
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__property:first-child * {
-    color: #ffffff !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    margin-bottom: 4px !important;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
-    display: block !important;
-}
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__property:not(:first-child),
-.notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__property:not(:first-child) * {
-    color: rgba(255,255,255,0.9) !important;
-    font-size: 12px !important;
-    font-weight: 400 !important;
-    line-height: 1.5 !important;
-    text-shadow: 0 1px 5px rgba(0,0,0,0.5) !important;
-}
-
-@media (max-width: 768px) {
-    /* 모바일 1열로 변경 */
-    .notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-gallery {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-    }
-    /* 모바일 폰트 크기 조정 */
-    .notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__property:first-child * {
-        font-size: 14px !important; 
-    }
-    .notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card__content .notion-collection-card__property:not(:first-child) * {
-        font-size: 11px !important; 
-    }
-    /*1열일 때 모바일 비율 조정 (선택사항) */
-    .notion-callout[class*="green"]:has(.notion-toggle) .notion-collection-card { 
-        aspect-ratio: 16 / 9 !important; 
-    }
-}
+.notion-callout[class*="green"]:has([class*="bullet"]) .notion-collection-card:not(:has(.notion-collection-card
