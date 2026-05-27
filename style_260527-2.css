@@ -69,6 +69,20 @@ h3, .notion-h3, h3 * {
   }
 }
 
+/* --- H4 제목 --- */
+h4, .notion-h4, h4 * {  
+  font-size: var(--pc-h4) !important; font-weight: var(--h4-weight) !important;  
+  line-height: var(--pc-lh-h4) !important; margin-top: var(--pc-h4-mt) !important; margin-bottom: var(--pc-h4-mb) !important;  
+}
+@media (max-width: 768px) {
+  h3, .notion-h3, h3 * {  
+    font-size: var(--mb-h4) !important; line-height: var(--mb-lh-h4) !important;  
+    margin-top: var(--mb-h4-mt) !important; margin-bottom: var(--mb-h4-mb) !important;  
+  }
+}
+
+
+
 /* --- 본문 및 링크 --- */
 .notion-text, 
 .notion-text *, 
