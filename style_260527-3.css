@@ -8,10 +8,10 @@
 :root {
   --font-family: 'Noto Sans KR', -apple-system, sans-serif !important;
    /* PC 수치 */
-  --pc-h1: 42px; --pc-h2: 28px; --pc-h3: 22px; --pc-h4: 22px; --pc-body: 16px; --pc-caption: 11px;
+  --pc-h1: 42px; --pc-h2: 28px; --pc-h3: 22px; --pc-h4: 19px; --pc-body: 16px; --pc-caption: 11px;
   --pc-lh-h1: 1.2; --pc-lh-h2: 1.2; --pc-lh-h3: 1.3; --pc-lh-body: 1.6; --pc-lh-caption: 1.5;
 /* 모바일 수치 */
-  --mb-h1: 27px; --mb-h2: 22px; --mb-h3: 18px; --mb-h4: 18px; --mb-body: 14px; --mb-caption: 8px;
+  --mb-h1: 27px; --mb-h2: 22px; --mb-h3: 18px; --mb-h4: 16px; --mb-body: 14px; --mb-caption: 8px;
   --mb-lh-h1: 1.2; --mb-lh-h2: 1.5; --mb-lh-h3: 1.2; --mb-lh-body: 1.6; --mb-lh-caption: 1.2;
 /* 공통 설정 */
   --h1-weight: 900;
