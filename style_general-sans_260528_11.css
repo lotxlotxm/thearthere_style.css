@@ -21,6 +21,14 @@
   --banner-gap: 20px;
 }
 
+/* 추가 */
+/* 본문 및 노션의 모든 텍스트 영역에 폰트 적용 */
+html, body, .notion, .notion-app, .notion-page-content, .notion-text, p, span, a, div, td, th {
+  font-family: var(--font-family) !important;
+}
+
+
+
 /* 2. 요소별 스타일 제어 (가변 폰트 설정 적용) */
 h1, .notion-h1, .notion-header__title, h1 * {  
   font-family: var(--font-family) !important;
