@@ -34,14 +34,44 @@ html, body, .notion, .notion-app, .notion-page-content, .notion-text, p, span, a
 
 /* 2. 요소별 스타일 제어 (H1 ~ Caption) */
 /* --- H1 제목 --- */
-h1, .notion-h1, .notion-header__title, h1 * {  
-  font-size: var(--pc-h1) !important; font-weight: var(--h1-weight) !important;  
-  line-height: var(--pc-lh-h1) !important; margin-top: var(--pc-h1-mt) !important; margin-bottom: var(--pc-h1-mb) !important;  
+/* --- H1 제목 --- */
+h1,
+.notion-h1,
+.notion-header__title {
+  font-size: var(--pc-h1) !important;
+  font-weight: var(--h1-weight) !important;
+  line-height: var(--pc-lh-h1) !important;
 }
+
+/* H1 내부 요소 상속 */
+h1 a,
+h1 span,
+h1 strong,
+h1 em,
+.notion-h1 a,
+.notion-h1 span,
+.notion-header__title a {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
 @media (max-width: 768px) {
-  h1, .notion-h1, .notion-header__title, h1 * {  
-    font-size: var(--mb-h1) !important; line-height: var(--mb-lh-h1) !important;  
-    margin-top: var(--mb-h1-mt) !important; margin-bottom: var(--mb-h1-mb) !important;  
+
+  h1,
+  .notion-h1,
+  .notion-header__title {
+    font-size: var(--mb-h1) !important;
+    line-height: var(--mb-lh-h1) !important;
+  }
+
+  h1 a,
+  h1 span,
+  .notion-h1 a,
+  .notion-h1 span {
+    font-size: inherit !important;
+    line-height: inherit !important;
   }
 }
 
