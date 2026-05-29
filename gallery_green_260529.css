@@ -186,7 +186,7 @@ display: none !important;
 /* [PC 버전] 갤러리 격자 배열 (기본 4열 배치) */
 .notion-callout[class*="green"]:has(code) .notion-collection-gallery {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; 
+    grid-template-columns: repeat(4, 1fr) !important; 
     gap: 8px !important;
     background: transparent !important;
     overflow-x: visible !important;
