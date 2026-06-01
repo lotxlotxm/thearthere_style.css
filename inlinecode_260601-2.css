@@ -1,6 +1,8 @@
-/*=========================================
-05📌 인라인코드*/
-/* [1] 태그형 : 레이아웃 및 형태 정의 */
+/*==========================================
+03📌 인라인코드 (본문 굵기 동기화 및 제어)
+===========================================*/
+/* #️⃣[태그형] 레이아웃 정의
+---------------------------------------*/
 code {
   display: inline-block !important;
   margin: 4px 2px !important;
@@ -17,8 +19,11 @@ code,
 code *,
 .notion-text code,
 .notion-text code * {
-  font-family: 'Noto Sans KR' !important; /* 
-  font-size: var(--pc-body) !important; /* 본문 스케일 변수 동기화 */
+  font-family: 'Roboto Flex' !important;
+
+  font-size: var(--pc-body-size) !important;
+  font-weight: var(--pc-body-weight) !important;
+
   line-height: 1.2 !important;
   color: inherit !important;
   -webkit-text-fill-color: currentcolor !important;
@@ -81,9 +86,10 @@ code:has(a):not(.notion-callout[class*="orange"] code):not([class*="blue"]):not(
     width: 100% !important;
   }
 }
-/**/
+
 /*=========================================
-📌 파란색 인라인코드 전용 바리에이션 0.8em */
+#️⃣[버튼형] 파란색 0.8em -> 화이트 버튼 
+-----------------------------------------*/
 code[class*="blue"],
 span[class*="blue"] code,
 .notion-inline-code[class*="blue"] {
@@ -131,7 +137,8 @@ code a span {
   opacity: 1 !important;
 }
 /*=========================================
-📌 빨간색 인라인코드 전용 바리에이션 1em*/
+#️⃣[버튼형] 빨간색 인라인코드 전용 바리에이션 1em
+------------------------------------------*/
 code[class*="red"],
 span[class*="red"] code,
 .notion-inline-code[class*="red"] {
@@ -185,7 +192,8 @@ code a span {
   opacity: 1 !important;
 }
 /*=========================================
-📌 주황색 인라인코드 전용 바리에이션 full*/
+#️⃣[버튼형] 주황색 인라인코드 전용 바리에이션 full
+------------------------------------------*/
 code[class*="orange"],
 span[class*="orange"] code,
 .notion-inline-code[class*="orange"] {
@@ -300,4 +308,79 @@ code a span {
         justify-content: center !important;
         box-sizing: border-box !important;
     }
+}
+/*=========================================
+#️⃣[알약형] 핑크색
+------------------------------------------*/
+code[class*="pink"],
+span[class*="pink"] code,
+.notion-inline-code[class*="pink"] {
+  /* 타이포 *1em !important;
+  line-height: 1.2 !important;
+  /* 컬러 */
+  color: #37352f !important;
+  -webkit-text-fill-color: #37352f !important;
+    font-weight: 650 !important;
+
+  /* 배경 */
+  background: #f7f7f7 !important;
+/* 형태 (★ 바더 컬러 정밀 이식) */
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  border: 1px solid #37352f !important;
+  /* 기타 */
+  opacity: 1 !important;
+  box-shadow: none !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+/* 2. 내부 span / a / div 강제 동기화
+(노션 내부 wrapper 대응)*/
+code[class*="pink"] *,
+span[class*="pink"] code *,
+.notion-inline-code[class*="pink"] * {
+  font-size: 1em !important;
+  line-height: 1.2 !important;
+  color: #37352f !important;
+  -webkit-text-fill-color:#37352f !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+/* 3. 기존 전역 code span 충돌 제거*/
+code a,
+code span,
+code a span {
+  font-size: 1em !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+/* 모바일 환경 제어 */
+@media (max-width: 768px) {
+  code[class*="pink"],
+  span[class*="pink"] code,
+  .notion-inline-code[class*="pink"] {
+    /* 모바일에서는 패딩을 줄여서 한 줄에 더 많이 들어오게 함 */
+    padding: 6px 14px !important; 
+    /* 폰트 사이즈를 약간 줄여서 버튼 높이 축소 */
+    font-size: 0.9em !important; 
+  }
+}
+
+/* 내부 동기화 */
+code[class*="pink"] *,
+span[class*="pink"] code *,
+.notion-inline-code[class*="pink"] * {
+  font-size: 1em !important;
+  line-height: 1.2 !important;
+  color: #37352f !important;
+  -webkit-text-fill-color: #37352f !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
 }
